@@ -24,7 +24,7 @@ const LoginSchema = yup.object({
 
 export default function Login() {
   const authContext = useContext(AuthContext);
-  const { login, login__card, login__info, btn__progress } = styles;
+  const { login, login__card, login__info, btn__progress, form } = styles;
   const [loginSuccess, setLoginSuccess] = useState();
   const [loginError, setLoginError] = useState();
   const [redirectOnLogin, setRedirectOnLogin] = useState(false);
@@ -40,7 +40,7 @@ export default function Login() {
       setLoginError('');
       setTimeout(() => {
         setRedirectOnLogin(true);
-      }, 3000);
+      }, 1000);
     } catch (error) {
       setLoginLoading(false);
       console.log(error);
@@ -68,14 +68,14 @@ export default function Login() {
       )}
 
       <Grid className={login} container justify='center'>
-        <Grid item xs={12} sm={8} md={6}>
+        <Grid item xs={12} sm={8} md={6} container spacing={5}>
           <Card className={login__card}>
             <CardContent>
               <Typography className='primary-textColor' variant='h5' paragraph>
                 Log In
               </Typography>
               <Typography variant='body2' color='secondary'></Typography>
-              <form onSubmit={formik.handleSubmit} className='mb-2'>
+              <form onSubmit={formik.handleSubmit} className={form}>
                 <TextField
                   label='Email'
                   placeholder='Email'
