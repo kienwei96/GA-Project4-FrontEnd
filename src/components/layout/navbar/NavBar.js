@@ -18,6 +18,7 @@ export default function NavBar() {
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
+    console.log(authContext);
   };
 
   const handleClose = () => {
@@ -125,7 +126,7 @@ export default function NavBar() {
             variant='subtitle1'
             sx={{ m: 0, p: 0, marginBlockEnd: -0.5, color: '#353839' }}
           >
-            Hi, Peng
+            Hi, {authContext.authState.userInfo.name}
           </Typography>
           <div>
             <IconButton
