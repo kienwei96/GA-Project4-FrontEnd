@@ -20,6 +20,7 @@ import Home from './components/home/Home';
 import NavBar from './components/layout/navbar/NavBar';
 import Footer from './components/layout/Footer';
 import Login from './components/login/Login';
+import Register from './components/register/Register';
 import { AuthProvider, AuthContext } from './context/AuthContext';
 import { FetchProvider } from './context/FetchContext';
 
@@ -58,6 +59,7 @@ function App() {
             <Routes>
               <Route exact path='/' element={<Home />} />
               <Route exact path='/login' element={<Login />} />
+              <Route exact path='/register' element={<Register />} />
             </Routes>
             <Footer />
           </FetchProvider>
