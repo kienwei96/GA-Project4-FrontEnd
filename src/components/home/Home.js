@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Button } from '@material-ui/core';
 
@@ -7,8 +7,11 @@ import LandingImg from '../../img/landingpage_1.png';
 import Picture1 from '../../img/picture_1.jpg';
 import Picture2 from '../../img/picture_2.jpg';
 import StepsImg from '../../img/steps.jpg';
+import { AuthContext } from '../../context/AuthContext';
 
 export default function Home() {
+  const authContext = useContext(AuthContext);
+
   const {
     header,
     header__text,
@@ -77,7 +80,7 @@ export default function Home() {
             Pick a day, time, and place to play any sports with someone or group
             of people with preferences
           </p>
-          {guestLinks}
+          {authContext.isAuthenticated() ? userLinks : guestLinks}
         </div>
         <img src={LandingImg} alt='Landing' className={header__img} />
       </header>
