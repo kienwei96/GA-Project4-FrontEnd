@@ -21,6 +21,8 @@ import NavBar from './components/layout/navbar/NavBar';
 import Footer from './components/layout/Footer';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
+import Profile from './components/profile/profile';
+import CreateProfile from './components/createProfile/createProfile';
 import { AuthProvider, AuthContext } from './context/AuthContext';
 import { FetchProvider } from './context/FetchContext';
 
@@ -60,6 +62,8 @@ function App() {
               <Route exact path='/' element={<Home />} />
               <Route exact path='/login' element={<Login />} />
               <Route exact path='/register' element={<Register />} />
+              <Route exact path='/profile' element={<Profile />} />
+              <Route exact path='/create-profile' element={<CreateProfile />} />
             </Routes>
             <Footer />
           </FetchProvider>
