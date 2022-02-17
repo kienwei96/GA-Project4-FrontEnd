@@ -154,7 +154,12 @@ export default function NavBar() {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
+              <Link
+                to='/profile'
+                style={{ textDecoration: 'none', color: 'inherit' }}
+              >
+                <MenuItem onClick={handleClose}>Profile</MenuItem>
+              </Link>
               <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>
           </div>
