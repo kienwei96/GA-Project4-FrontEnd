@@ -12,6 +12,7 @@ import {
   Typography,
   Button,
 } from '@material-ui/core';
+import { GoogleLoginButton } from 'react-social-login-buttons';
 
 import styles from './Login.module.css';
 import { publicFetch } from '../../util/publicFetch';
@@ -50,6 +51,13 @@ export default function Login() {
     }
   };
 
+  // const onGoogleLogin = () => {
+  //   window.open(
+  //     `${process.env.REACT_APP_API_URL}/googleLogin/auth/google`,
+  //     '_self'
+  //   );
+  // };
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -61,11 +69,19 @@ export default function Login() {
     },
   });
 
+  let pageRedirect;
+
+  if (redirectOnLogin && authContext.isUser()) {
+    if (authContext.authState.userInfo.setProfile) {
+      pageRedirect = <Navigate to='/profile' replace={true} />;
+    } else {
+      pageRedirect = <Navigate to='/events' replace={true} />;
+    }
+  }
+
   return (
     <>
-      {redirectOnLogin && authContext.isUser() && (
-        <Navigate to='/events' replace={true} />
-      )}
+      {pageRedirect}
 
       <Grid className={login} container justify='center'>
         <Grid item xs={12} sm={8} md={6} container spacing={5}>
@@ -93,9 +109,6 @@ export default function Login() {
                   type='password'
                   value={formik.values.password}
                   onChange={formik.handleChange}
-                  error={
-                    formik.touched.password && Boolean(formik.errors.password)
-                  }
                   helperText={formik.touched.password && formik.errors.password}
                 />
                 {loginError}
@@ -119,6 +132,7 @@ export default function Login() {
                 Dont have an account? <Link to='/register'>Sign Up</Link>
               </Typography>
             </CardContent>
+            {/* <GoogleLoginButton onClick={onGoogleLogin} /> */}
           </Card>
         </Grid>
       </Grid>
