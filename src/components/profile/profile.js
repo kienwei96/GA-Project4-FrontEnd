@@ -39,41 +39,49 @@ export default function Profile() {
 
   let profilePage;
 
-  if (authContext.authState.userInfo.setProfile) {
-    profilePage = (
-      <div className={styles.profile}>
-        <Typography variant='h5' component='p' gutterBottom>
-          Welcome, {authContext.authState.userInfo.name} !
-        </Typography>
-        <Typography variant='p' component='p' gutterBottom>
-          You have not yet setup a profile, please click below to complete your
-          profile.
-        </Typography>
-        <p></p>
-        <Link to='/create-profile'>
-          <Button
-            className='primary-color marginB-2'
-            variant='contained'
-            to='/create-profile'
-          >
-            Create Profile
-          </Button>
-        </Link>
-      </div>
-    );
-  } else {
-    if (Object.keys(userProfile).length > 0) {
-      profilePage = <ProfileContent profileData={userProfile} />;
+  try {
+    if (authContext.authState.userInfo.setProfile) {
+      profilePage = (
+        <div className={styles.profile}>
+          <Typography variant='h5' component='p' gutterBottom>
+            Welcome, {authContext.authState.userInfo.name} !
+          </Typography>
+          <Typography variant='p' component='p' gutterBottom>
+            You have not yet setup a profile, please click below to complete
+            your profile.
+          </Typography>
+          <p></p>
+          <Link to='/create-profile'>
+            <Button
+              className='primary-color marginB-2'
+              variant='contained'
+              to='/create-profile'
+            >
+              Create Profile
+            </Button>
+          </Link>
+        </div>
+      );
     } else {
-      profilePage = <ErrorPage />;
+      if (Object.keys(userProfile).length > 0) {
+        profilePage = <ProfileContent profileData={userProfile} />;
+      }
     }
+  } catch {
+    profilePage = <ErrorPage />;
   }
 
   console.log(userProfile);
   return (
-    <div className='minHeight'>
-      <h1 className='primary-textColor text-center'>User Profile</h1>
-      {profilePage}
-    </div>
+    <>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <div className='minHeight'>
+          <h1 className='primary-textColor text-center'>User Profile</h1>
+          {profilePage}
+        </div>
+      )}
+    </>
   );
 }
