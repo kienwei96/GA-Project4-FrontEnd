@@ -2,3 +2,11 @@
   min-height: 70vh;
   padding: 50px;
 }
+
+.content {
+  display: block;
+}
+
+.innerContent {
+  margin-left: 40%;
+}
