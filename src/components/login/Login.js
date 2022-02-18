@@ -51,12 +51,12 @@ export default function Login() {
     }
   };
 
-  // const onGoogleLogin = () => {
-  //   window.open(
-  //     `${process.env.REACT_APP_API_URL}/googleLogin/auth/google`,
-  //     '_self'
-  //   );
-  // };
+  const onGoogleLogin = () => {
+    window.open(
+      `${process.env.REACT_APP_API_URL}/googleLogin/auth/google`,
+      '_self'
+    );
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -132,7 +132,7 @@ export default function Login() {
                 Dont have an account? <Link to='/register'>Sign Up</Link>
               </Typography>
             </CardContent>
-            {/* <GoogleLoginButton onClick={onGoogleLogin} /> */}
+            <GoogleLoginButton onClick={onGoogleLogin} />
           </Card>
         </Grid>
       </Grid>
