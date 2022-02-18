@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Button } from '@material-ui/core';
 
@@ -10,6 +10,9 @@ import StepsImg from '../../img/steps.jpg';
 import { AuthContext } from '../../context/AuthContext';
 
 export default function Home() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   const authContext = useContext(AuthContext);
 
   const {
