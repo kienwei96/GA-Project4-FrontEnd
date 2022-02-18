@@ -13,11 +13,7 @@ export default () => {
       eventLink = (
         <>
           <span>/</span>
-          <Link
-            className='white-link'
-            component={RouterLink}
-            to='/create-event'
-          >
+          <Link className='white-link' component={RouterLink} to='/createEvent'>
             Create Event
           </Link>
         </>
@@ -38,7 +34,7 @@ export default () => {
               Home
             </Link>
             <span>/</span>
-            <Link className='white-link' component={RouterLink} to='/events'>
+            <Link className='white-link' component={RouterLink} to='/eventlist'>
               Events List
             </Link>
             {eventLink}
