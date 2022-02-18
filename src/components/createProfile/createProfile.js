@@ -38,6 +38,7 @@ export default function createProfile() {
   const [favourite, setFavourite] = useState([]);
   const [bio, setBio] = useState('');
   const [response, setResponse] = useState(null);
+  const [badRequest, setBadRequest] = useState('');
   const [loading, setLoading] = useState(false);
   const [redirectOnProfile, setRedirectOnProfile] = useState(false);
 
@@ -56,14 +57,17 @@ export default function createProfile() {
         bio: bio,
       });
       console.log('response', response.data.message);
-      authContext.authState.userInfo.setProfile = false;
+      authContext.authState.userInfo.setProfile = true;
       setResponse(response.data.message);
       setTimeout(() => {
+        setLoading(false);
         setRedirectOnProfile(true);
-      }, 1000);
+      }, 1500);
     } catch (error) {
       console.log(error.response);
       setResponse(error.response.data);
+      setBadRequest(error.response.data);
+      setLoading(false);
     }
   };
 
@@ -104,7 +108,7 @@ export default function createProfile() {
     setFavourite(favouriteArray);
   };
 
-  console.log('favourite sport;', favourite);
+  console.log('bad request is', badRequest);
 
   return (
     <>
@@ -301,6 +305,15 @@ export default function createProfile() {
                     }}
                   />
                 </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell align='center'> </TableCell>
+                <TableCell>
+                  <strong>
+                    {badRequest ? `Error: ${badRequest.message}!` : ''}
+                  </strong>
+                </TableCell>
+                <TableCell></TableCell>
               </TableRow>
             </TableBody>
           </Table>
