@@ -66,6 +66,8 @@ export default function Login() {
     },
   });
 
+  console.log(registerSuccess);
+
   return (
     <>
       {redirectOnLogin && authContext.isUser() && (
@@ -135,7 +137,8 @@ export default function Login() {
                     ? registerError.name ||
                       registerError.email ||
                       registerError.password ||
-                      registerError.password2
+                      registerError.password2 ||
+                      registerError
                     : ''}
                 </Typography>
                 <Button
