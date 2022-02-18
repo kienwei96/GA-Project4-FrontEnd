@@ -36,7 +36,7 @@ export default function Login() {
   const submitCredentials = async (credentials) => {
     try {
       setRegisterLoading(true);
-      const { data } = await publicFetch.post(`register`, credentials);
+      const { data } = await publicFetch.post(`/register`, credentials);
 
       authContext.setAuthState(data);
       setRegisterSuccess(data.message);
@@ -78,9 +78,6 @@ export default function Login() {
             <CardContent>
               <Typography className='primary-textColor' variant='h5' paragraph>
                 Sign Up
-              </Typography>
-              <Typography variant='body2' color='secondary'>
-                {registerError}
               </Typography>
               <form onSubmit={formik.handleSubmit} className={form}>
                 <TextField
@@ -132,6 +129,14 @@ export default function Login() {
                   By creating an account, you accept ConnectSport{' '}
                   <Link to='/termsofservice'>Terms of Service</Link> and{' '}
                   <Link to='/privacypolicy'>Privacy Policy</Link>
+                </Typography>
+                <Typography variant='body3' color='secondary'>
+                  {registerError
+                    ? registerError.name ||
+                      registerError.email ||
+                      registerError.password ||
+                      registerError.password2
+                    : ''}
                 </Typography>
                 <Button
                   className={
