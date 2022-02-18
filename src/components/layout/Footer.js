@@ -1,8 +1,31 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { AppBar, Container, Grid, Link, Typography } from '@material-ui/core';
+import { AuthContext } from '../../context/AuthContext';
 
 export default () => {
+  const authContext = useContext(AuthContext);
+  let eventLink;
+
+  const createEventLink = () => {
+    if (authContext.isUser()) {
+      console.log('is user');
+      eventLink = (
+        <>
+          <span>/</span>
+          <Link
+            className='white-link'
+            component={RouterLink}
+            to='/create-event'
+          >
+            Create Event
+          </Link>
+        </>
+      );
+    } else eventLink = '';
+  };
+
+  createEventLink();
   return (
     <footer>
       <AppBar className='primary-color marginT-3 pad-2' position='static'>
@@ -18,14 +41,7 @@ export default () => {
             <Link className='white-link' component={RouterLink} to='/events'>
               Events List
             </Link>
-            <span>/</span>
-            <Link
-              className='white-link'
-              component={RouterLink}
-              to='/create-event'
-            >
-              Create Event
-            </Link>
+            {eventLink}
             <span>/</span>
             <Link className='white-link' component={RouterLink} to='/register'>
               Get Started
