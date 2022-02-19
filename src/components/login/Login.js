@@ -75,7 +75,7 @@ export default function Login() {
     if (authContext.authState.userInfo.setProfile) {
       pageRedirect = <Navigate to='/profile' replace={true} />;
     } else {
-      pageRedirect = <Navigate to='/events' replace={true} />;
+      pageRedirect = <Navigate to='/' replace={true} />;
     }
   }
 
