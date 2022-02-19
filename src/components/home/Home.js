@@ -42,7 +42,7 @@ export default function Home() {
       <Button
         className='secondary-color'
         component={Link}
-        to='/events'
+        to='/eventmain'
         variant='contained'
         size='large'
       >
@@ -65,7 +65,7 @@ export default function Home() {
       <Button
         className='secondary-color'
         component={Link}
-        to='/events'
+        to='/eventmain'
         variant='contained'
         size='large'
       >
@@ -120,7 +120,7 @@ export default function Home() {
               <Button
                 className='primary-color marginB-2'
                 component={Link}
-                to='/events'
+                to='/eventmain'
                 variant='contained'
                 size='large'
               >
