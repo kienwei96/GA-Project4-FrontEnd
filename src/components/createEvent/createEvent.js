@@ -141,20 +141,22 @@ export default function CreateEvent() {
                     <Grid item xs={6}>
                       <FormControl
                         fullWidth={true}
-                        variant='outlined'
+                        variant='standard'
                         margin='normal'
                       >
-                        <InputLabel id='demo-simple-select-filled-label'>
+                        <InputLabel shrink={true} id='sportType'>
                           Type of Sport *
                         </InputLabel>
                         <Select
-                          labelId='demo-simple-select-filled-label'
-                          id='demo-simple-select-filled'
-                          name='sport'
-                          type='name'
+                          labelId='sportType'
+                          id='sportType'
+                          label='Type of Sport'
                           value={sport}
                           onChange={handleSportChange}
                         >
+                          <MenuItem value=''>
+                            <em>None</em>
+                          </MenuItem>
                           <MenuItem value={'Badminton'}>Badminton</MenuItem>
                           <MenuItem value={'Basketball'}>Basketball</MenuItem>
                           <MenuItem value={'Baseball'}>Baseball</MenuItem>
@@ -163,6 +165,7 @@ export default function CreateEvent() {
                           <MenuItem value={'Soccer'}>Soccer</MenuItem>
                           <MenuItem value={'Ping Pong'}>Ping Pong</MenuItem>
                           <MenuItem value={'Tennis'}>Tennis</MenuItem>
+                          <MenuItem value={'Running'}>Running</MenuItem>
                         </Select>
                         {response ? response.sport : ''}
                       </FormControl>
@@ -190,7 +193,10 @@ export default function CreateEvent() {
                         variant='outlined'
                         margin='normal'
                       >
-                        <InputLabel id='demo-simple-select-filled-label'>
+                        <InputLabel
+                          shrink={true}
+                          id='demo-simple-select-filled-label'
+                        >
                           COVID-19 Vaccination Required *
                         </InputLabel>
                         <Select
@@ -212,7 +218,10 @@ export default function CreateEvent() {
                         variant='outlined'
                         margin='normal'
                       >
-                        <InputLabel id='demo-simple-select-filled-label'>
+                        <InputLabel
+                          shrink={true}
+                          id='demo-simple-select-filled-label'
+                        >
                           Game Level *
                         </InputLabel>
                         <Select
