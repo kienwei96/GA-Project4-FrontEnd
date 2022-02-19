@@ -136,9 +136,15 @@ export default function Event() {
     <div className='minHeight'>
       <Grid container className='marginX-1'>
         <Grid item xs={12} sm={6} md={6}>
-          <Typography className={styles.eventword} variant='h3' component='h1'>
-            List of Events
-          </Typography>
+          <div className={styles.header}>
+            <Typography
+              className={styles.eventword}
+              variant='h3'
+              component='h1'
+            >
+              List of Events
+            </Typography>
+          </div>
         </Grid>
         <Grid>
           <FormControl variant='outlined' margin='normal'>
