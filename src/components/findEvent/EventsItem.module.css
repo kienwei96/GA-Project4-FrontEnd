@@ -13,6 +13,11 @@
   margin-top: 20px;
 }
 
+.header {
+  margin-top: 20px;
+  margin-left: 80px;
+}
+
 .eventword {
   display: flex;
   justify-content: center;
