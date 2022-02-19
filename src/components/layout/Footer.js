@@ -34,7 +34,7 @@ export default () => {
               Home
             </Link>
             <span>/</span>
-            <Link className='white-link' component={RouterLink} to='/eventlist'>
+            <Link className='white-link' component={RouterLink} to='/eventmain'>
               Events List
             </Link>
             {eventLink}

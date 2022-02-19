@@ -104,7 +104,7 @@ export default function NavBar() {
             sx={{ flexGrow: 1, fontWeight: 600 }}
           >
             <Link
-              to='/eventlist'
+              to='/eventmain'
               style={{ textDecoration: 'none', color: 'inherit' }}
             >
               <Button color='inherit'>Find Event</Button>
