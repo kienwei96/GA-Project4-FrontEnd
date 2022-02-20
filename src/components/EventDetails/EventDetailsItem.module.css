@@ -11,6 +11,11 @@
   margin-right: 0.4rem;
 }
 
+.errorMessage {
+  margin: 10px 10px 10px 10px;
+  
+}
+
 .eventword {
   display: flex;
   justify-content: center;

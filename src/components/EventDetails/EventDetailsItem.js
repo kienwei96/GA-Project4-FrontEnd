@@ -27,6 +27,7 @@ import Running from '../../img/running.jpg';
 import Soccer from '../../img/soccer.jpg';
 import Tennis from '../../img/tennis.jpg';
 import { AuthContext } from '../../context/AuthContext';
+import { FetchContext } from '../../context/FetchContext';
 
 export default function EventDetailsItem(props) {
   const photo = (sport) => {
@@ -49,19 +50,53 @@ export default function EventDetailsItem(props) {
         return Tennis;
     }
   };
+  const authContext = useContext(AuthContext);
+  const fetchContext = useContext(FetchContext);
   const eventData = props.eventData;
   const isAuthenticated = props.auth;
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [response, setResponse] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [badRequest, setBadRequest] = useState(false);
+  const [refresh, setRefresh] = useState(false);
 
+  const callApi = async () => {
+    try {
+      setLoading(true);
+      const { data } = await fetchContext.authAxios.post(
+        `/event/events/join/${eventData._id}/${authContext.authState.userInfo._id}`
+      );
+      setResponse(data);
+      setTimeout(() => {
+        setLoading(false);
+      }, 1500);
+    } catch (error) {
+      setLoading(false);
+      setBadRequest(true);
+      console.log(error.response.data.error);
+      setErrorMessage(error.response.data.error);
+    }
+  };
   const handleBackButton = () => {
     navigate(-1);
   };
 
+  const handleRefresh = () => {
+    if (refresh) {
+      setRefresh(false);
+    } else setRefresh(false);
+  };
+
   const handleJoinSubmit = () => {
+    callApi();
+    handleRefresh();
     console.log(`joined the ${eventData._id} event!`);
   };
 
-  console.log('event data in item page', eventData);
+  console.log('error message is', errorMessage);
+
+  useEffect(() => {}, [refresh]);
 
   return (
     <Paper className='pad-2'>
@@ -148,18 +183,31 @@ export default function EventDetailsItem(props) {
       ) : (
         ''
       )}
-      <div className='marginT-1'>
-        {eventData.listofplayer.map((player, index) => {
-          return (
-            <Chip
-              key={player._id}
-              className='marginR-1 marginX-1'
-              avatar={<Avatar>{index + 1}</Avatar>}
-              label={player.name}
-              variant='outlined'
-            />
-          );
-        })}
+      {isAuthenticated ? (
+        <>
+          <span className={styles.labelInfo}>Players</span>
+          <div className='marginT-1'>
+            {eventData.listofplayer.map((player, index) => {
+              return (
+                <Link to={`/profile/${player._id}`}>
+                  <Chip
+                    key={player._id}
+                    className='marginR-1 marginX-1'
+                    avatar={<Avatar>{index + 1}</Avatar>}
+                    label={player.name}
+                    variant='outlined'
+                  />
+                </Link>
+              );
+            })}
+          </div>
+        </>
+      ) : (
+        ''
+      )}
+
+      <div className={styles.errorMessage}>
+        {badRequest ? <strong> {errorMessage} !</strong> : ''}
       </div>
       <Button
         className='primary-color white-link'
