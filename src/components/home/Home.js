@@ -14,6 +14,7 @@ export default function Home() {
     window.scrollTo(0, 0);
   });
   const authContext = useContext(AuthContext);
+  const isAuthenticated = authContext.isAuthenticated();
 
   const {
     header,
@@ -83,7 +84,7 @@ export default function Home() {
             Pick a day, time, and place to play any sports with someone or group
             of people with preferences
           </p>
-          {authContext.isAuthenticated() ? userLinks : guestLinks}
+          {isAuthenticated ? userLinks : guestLinks}
         </div>
         <img src={LandingImg} alt='Landing' className={header__img} />
       </header>
@@ -124,7 +125,7 @@ export default function Home() {
                 variant='contained'
                 size='large'
               >
-                See Events
+                Join Events
               </Button>
             </div>
           </div>
@@ -139,15 +140,27 @@ export default function Home() {
                 You can also create event and set preference for other user to
                 join you to play together
               </p>
-              <Button
-                className='primary-color'
-                component={Link}
-                to='/create-event'
-                variant='contained'
-                size='large'
-              >
-                Post Event
-              </Button>
+              {isAuthenticated ? (
+                <Button
+                  className='primary-color'
+                  component={Link}
+                  to='/createEvent'
+                  variant='contained'
+                  size='large'
+                >
+                  Post Event
+                </Button>
+              ) : (
+                <Button
+                  className='primary-color'
+                  component={Link}
+                  to='/login'
+                  variant='contained'
+                  size='large'
+                >
+                  Post Event
+                </Button>
+              )}
             </div>
           </div>
         </div>
