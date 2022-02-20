@@ -123,6 +123,30 @@ export default function NavBar() {
             </Link>
           </Typography>
           <Typography
+            variant='h6'
+            component='span'
+            sx={{ flexGrow: 1, fontWeight: 600 }}
+          >
+            <Link
+              to='/myEvent'
+              style={{ textDecoration: 'none', color: 'inherit' }}
+            >
+              <Button color='inherit'>My Event</Button>
+            </Link>
+          </Typography>
+          <Typography
+            variant='h6'
+            component='span'
+            sx={{ flexGrow: 1, fontWeight: 600 }}
+          >
+            <Link
+              to='/joinedEvent'
+              style={{ textDecoration: 'none', color: 'inherit' }}
+            >
+              <Button color='inherit'>Joined Event</Button>
+            </Link>
+          </Typography>
+          <Typography
             variant='subtitle1'
             sx={{ m: 0, p: 0, marginBlockEnd: -0.5, color: '#353839' }}
           >
