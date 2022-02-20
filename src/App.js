@@ -24,12 +24,14 @@ import Register from './components/register/Register';
 import Profile from './components/profile/profile';
 import CreateProfile from './components/createProfile/createProfile';
 import EditProfile from './components/editProfile/editProfile';
+import OtherProfile from './components/otherProfile/otherProfile';
 import PrivacyPolicy from './components/others/PrivacyPolicy';
 import { AuthProvider, AuthContext } from './context/AuthContext';
 import { FetchProvider } from './context/FetchContext';
 import TermsofService from './components/others/TermsofService';
-import EventList from './components/findEvent/EventList';
+import EventMain from './components/eventPage/EventMain';
 import CreateEvent from './components/createEvent/createEvent';
+import EventDetails from './components/EventDetails/EventDetails';
 import { ProfileProvider } from './context/ProfileContext';
 
 let theme = createTheme({
@@ -70,7 +72,9 @@ function App() {
                 <Route exact path='/login' element={<Login />} />
                 <Route exact path='/register' element={<Register />} />
                 <Route exact path='/profile' element={<Profile />} />
-                <Route exact path='/eventlist' element={<EventList />} />
+                <Route exact path='/profile/:id' element={<OtherProfile />} />
+                <Route exact path='/eventmain' element={<EventMain />} />
+                <Route exact path='/event/:id' element={<EventDetails />} />
                 <Route exact path='/createEvent' element={<CreateEvent />} />
                 <Route
                   exact
