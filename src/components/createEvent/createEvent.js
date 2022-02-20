@@ -298,7 +298,7 @@ export default function CreateEvent() {
 
   return (
     <>
-      {redirectPage && <Navigate to='/eventlist' replace={true} />}
+      {redirectPage && <Navigate to='/eventmain' replace={true} />}
       {loading ? <Spinner /> : pageRedirect}
     </>
   );
