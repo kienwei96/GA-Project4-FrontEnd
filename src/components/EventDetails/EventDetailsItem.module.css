@@ -13,7 +13,10 @@
 
 .errorMessage {
   margin: 10px 10px 10px 10px;
-  
+}
+
+.playerDiv {
+  margin-top: 30px;
 }
 
 .eventword {

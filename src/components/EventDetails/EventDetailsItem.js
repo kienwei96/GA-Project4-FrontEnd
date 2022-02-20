@@ -48,6 +48,8 @@ export default function EventDetailsItem(props) {
         return Soccer;
       case 'Tennis':
         return Tennis;
+      case 'Futsal':
+        return Soccer;
     }
   };
   const authContext = useContext(AuthContext);
@@ -92,6 +94,7 @@ export default function EventDetailsItem(props) {
     callApi();
     handleRefresh();
     console.log(`joined the ${eventData._id} event!`);
+    window.location.reload();
   };
 
   console.log('error message is', errorMessage);
@@ -155,6 +158,30 @@ export default function EventDetailsItem(props) {
               {eventData.user.name}
             </Link>
           </Typography>
+          {isAuthenticated ? (
+            <>
+              <div className={styles.playerDiv}>
+                <span className={styles.labelInfo}>Players</span>
+                <div className='marginT-1'>
+                  {eventData.listofplayer.map((player, index) => {
+                    return (
+                      <Link to={`/profile/${player._id}`}>
+                        <Chip
+                          key={player._id}
+                          className='marginR-1 marginX-1'
+                          avatar={<Avatar>{index + 1}</Avatar>}
+                          label={player.name}
+                          variant='outlined'
+                        />
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            </>
+          ) : (
+            ''
+          )}
         </Grid>
         <Grid container item xs={12} md={6}>
           <img
@@ -180,28 +207,6 @@ export default function EventDetailsItem(props) {
             {eventData.player - eventData.listofplayer.length} spots left
           </p>
         </Box>
-      ) : (
-        ''
-      )}
-      {isAuthenticated ? (
-        <>
-          <span className={styles.labelInfo}>Players</span>
-          <div className='marginT-1'>
-            {eventData.listofplayer.map((player, index) => {
-              return (
-                <Link to={`/profile/${player._id}`}>
-                  <Chip
-                    key={player._id}
-                    className='marginR-1 marginX-1'
-                    avatar={<Avatar>{index + 1}</Avatar>}
-                    label={player.name}
-                    variant='outlined'
-                  />
-                </Link>
-              );
-            })}
-          </div>
-        </>
       ) : (
         ''
       )}
