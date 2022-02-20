@@ -39,7 +39,6 @@ export default function EventsItem(props) {
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [refresh, setRefresh] = useState(false);
   console.log('event item page my event props', props.myEvent);
   console.log('event item page joined event props', props.joinedEvent);
 
@@ -100,14 +99,8 @@ export default function EventsItem(props) {
     }
   };
 
-  const handleRefresh = () => {
-    if (refresh) {
-      setRefresh(false);
-    } else setRefresh(false);
-  };
-
   const handleDelete = () => {
-    callApi();
+    callDeleteApi();
     window.location.reload();
   };
 
