@@ -70,7 +70,7 @@ export default function Profile() {
         </div>
       );
     } else if (userProfile) {
-      profilePage = <ProfileContent profileData={userProfile} />;
+      profilePage = <ProfileContent profileData={userProfile} profileCheck={true} />;
     }
   } catch {
     profilePage = <ErrorPage />;
