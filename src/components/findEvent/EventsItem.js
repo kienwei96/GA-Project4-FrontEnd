@@ -20,6 +20,7 @@ import Spinner from '../others/Spinner';
 import sportImage from '../../img/picture_2.jpg';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import PersonAddDisabledIcon from '@mui/icons-material/PersonAddDisabled';
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import styles from './EventsItem.module.css';
 import Basketball from '../../img/basketball.jpg';
 import Baseball from '../../img/baseball.jpg';
@@ -73,10 +74,11 @@ export default function EventsItem(props) {
               icon={<VaccinesIcon />}
               label={eventData.vaccination ? 'Required' : 'Not Required'}
             />
+            <Chip icon={<SportsEsportsIcon />} label={eventData.level} />
             {eventData.slot ? (
-              <Chip icon={<PersonAddDisabledIcon />} />
+              <Chip icon={<PersonAddDisabledIcon />} label={'Full'} />
             ) : (
-              <Chip icon={<PersonAddAlt1Icon />} />
+              <Chip icon={<PersonAddAlt1Icon />} label={'Available'} />
             )}
             <div className={styles.description}>
               <Typography variant='body2' color='textSecondary' component='p'>
