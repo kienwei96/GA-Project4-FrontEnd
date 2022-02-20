@@ -25,7 +25,7 @@ import Spinner from '../others/Spinner';
 import EventList from './EventList';
 import styles from './EventsItem.module.css';
 
-export default function Event() {
+export default function Event(props) {
   const authContext = useContext(AuthContext);
   const fetchContext = useContext(FetchContext);
   const [response, setResponse] = useState('');
@@ -128,10 +128,6 @@ export default function Event() {
     );
   }
 
-  console.log('sport type', sport);
-  console.log('vaccination status', vaccination);
-  console.log('apicall', apiCall);
-  console.log('refresh is called', refresh);
   return (
     <div className='minHeight'>
       <Grid container className='marginX-1'>

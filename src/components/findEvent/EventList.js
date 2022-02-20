@@ -11,9 +11,14 @@ import EventsItem from './EventsItem';
 
 export default function EventList(props) {
   const eventData = props.events;
-  console.log('eventprops', eventData);
+  console.log('my event props', props.myEvent);
   const render = eventData.map((event) => (
-    <EventsItem key={eventData._id} event={event} />
+    <EventsItem
+      key={eventData._id}
+      event={event}
+      myEvent={props.myEvent}
+      joinedEvent={props.joinedEvent}
+    />
   ));
   return <div>{render ? render : ''}</div>;
 }
