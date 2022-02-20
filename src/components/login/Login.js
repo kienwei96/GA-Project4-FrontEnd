@@ -132,7 +132,6 @@ export default function Login() {
                 Dont have an account? <Link to='/register'>Sign Up</Link>
               </Typography>
             </CardContent>
-            {/* <GoogleLoginButton onClick={onGoogleLogin} /> */}
           </Card>
         </Grid>
       </Grid>
