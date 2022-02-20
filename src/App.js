@@ -59,6 +59,11 @@ let theme = createTheme({
 
 theme = responsiveFontSizes(theme);
 
+const UserRoute = () => {
+  const authContext = useContext(AuthContext);
+  return authContext.isAuthenticated() ? <Outlet /> : <Navigate to='/' />;
+};
+
 function App() {
   return (
     <div className='App'>
@@ -71,17 +76,8 @@ function App() {
                 <Route exact path='/' element={<Home />} />
                 <Route exact path='/login' element={<Login />} />
                 <Route exact path='/register' element={<Register />} />
-                <Route exact path='/profile' element={<Profile />} />
-                <Route exact path='/profile/:id' element={<OtherProfile />} />
                 <Route exact path='/eventmain' element={<EventMain />} />
                 <Route exact path='/event/:id' element={<EventDetails />} />
-                <Route exact path='/createEvent' element={<CreateEvent />} />
-                <Route
-                  exact
-                  path='/create-profile'
-                  element={<CreateProfile />}
-                />
-                <Route exact path='/edit-profile' element={<EditProfile />} />
                 <Route
                   exact
                   path='/privacypolicy'
@@ -92,6 +88,17 @@ function App() {
                   path='/termsofservice'
                   element={<TermsofService />}
                 />
+                <Route exact path='/' element={<UserRoute />}>
+                  <Route exact path='/profile' element={<Profile />} />
+                  <Route exact path='/profile/:id' element={<OtherProfile />} />
+                  <Route exact path='/createEvent' element={<CreateEvent />} />
+                  <Route
+                    exact
+                    path='/create-profile'
+                    element={<CreateProfile />}
+                  />
+                  <Route exact path='/edit-profile' element={<EditProfile />} />
+                </Route>
               </Routes>
               <Footer />
             </ProfileProvider>
