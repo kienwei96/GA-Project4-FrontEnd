@@ -23,7 +23,7 @@ import { FetchContext } from '../../context/FetchContext';
 const icon = <CheckBoxOutlineBlankIcon fontSize='small' />;
 const checkedIcon = <CheckBoxIcon fontSize='small' />;
 
-export default function createProfile() {
+export default function CreateProfile() {
   const authContext = useContext(AuthContext);
   const fetchContext = useContext(FetchContext);
   const { table_header, create } = styles;

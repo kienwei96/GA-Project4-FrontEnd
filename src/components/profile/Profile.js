@@ -4,7 +4,7 @@ import { Typography, Button } from '@material-ui/core';
 import { AuthContext } from '../../context/AuthContext';
 import { FetchContext } from '../../context/FetchContext';
 import { ProfileContext } from '../../context/ProfileContext';
-import ProfileContent from '../profileContent/profileContent';
+import ProfileContent from '../profileContent/ProfileContent';
 import Spinner from '../others/Spinner';
 import ErrorPage from '../others/Error';
 import styles from './profile.module.css';
