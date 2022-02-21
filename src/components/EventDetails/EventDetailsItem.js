@@ -218,7 +218,12 @@ export default function EventDetailsItem(props) {
           </Grid>
           <Grid container item xs={12} md={6}>
             <img
-              style={{ width: '100%' }}
+              style={{
+                minWidth: '600px',
+                maxWidth: '600px',
+                minHeight: '450px',
+                maxHeight: '450px',
+              }}
               src={photo(eventData.sport)}
               alt='Sport'
             />
