@@ -21,19 +21,19 @@ import NavBar from './components/layout/navbar/NavBar';
 import Footer from './components/layout/Footer';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
-import Profile from './components/profile/profile';
-import CreateProfile from './components/createProfile/createProfile';
-import EditProfile from './components/editProfile/editProfile';
-import OtherProfile from './components/otherProfile/otherProfile';
+import Profile from './components/profile/Profile';
+import CreateProfile from './components/createProfile/CreateProfile';
+import EditProfile from './components/editProfile/EditProfile';
+import OtherProfile from './components/otherProfile/OtherProfile';
 import PrivacyPolicy from './components/others/PrivacyPolicy';
 import { AuthProvider, AuthContext } from './context/AuthContext';
 import { FetchProvider } from './context/FetchContext';
 import TermsofService from './components/others/TermsofService';
 import EventMain from './components/eventPage/EventMain';
-import CreateEvent from './components/createEvent/createEvent';
+import CreateEvent from './components/createEvent/CreateEvent';
 import EventDetails from './components/EventDetails/EventDetails';
-import MyEvent from './components/myEvent/myEventPage';
-import JoinedEvent from './components/joinEventPage/joinEventPage';
+import MyEvent from './components/myEvent/MyEventPage';
+import JoinedEvent from './components/joinEventPage/JoinEventPage';
 import { ProfileProvider } from './context/ProfileContext';
 
 let theme = createTheme({
