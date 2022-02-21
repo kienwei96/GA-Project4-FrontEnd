@@ -3,6 +3,7 @@
 ## Sport Event Hosting Web Application
 
 **Website: [ConnectSport](https://connect-sport.herokuapp.com/)**
+
 **Server: [ConnectSport-Server](https://connect-sport-server.herokuapp.com/)**
 
 **Team members:**
