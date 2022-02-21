@@ -4,6 +4,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { FetchContext } from '../../context/FetchContext';
 import { Link } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
+import './GlobalCSs.css';
 import {
   Grid,
   Card,
@@ -143,30 +144,18 @@ export default function Event(props) {
           </div>
         </Grid>
         <Grid>
-          <FormControl variant='outlined' margin='normal'>
+          <FormControl width={'100%'} variant='outlined' margin='normal'>
             <InputLabel shrink={true} id='Search sport by categories'>
               Search sport by categories *
             </InputLabel>
             <Select
-              MenuProps={{
-                anchorOrigin: {
-                  vertical: 'bottom',
-                  horizontal: 'left',
-                },
-                transformOrigin: {
-                  vertical: 'top',
-                  horizontal: 'left',
-                },
-                getContentAnchorEl: null,
-              }}
-              sx={{ width: 200, display: 'flex-grid', margin: '8px' }}
+              sx={{ width: 200, margin: '8px' }}
               labelId='Search sport by categories'
               id='Search sport by categories'
               name='typeofsport'
               type='name'
               value={sport}
               onChange={handleSportChange}
-              autoWidth
             >
               <MenuItem value={'all'}>All</MenuItem>
               <MenuItem value={'Badminton'}>Badminton</MenuItem>
