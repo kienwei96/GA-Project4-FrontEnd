@@ -26,7 +26,7 @@ export default function CreateEvent() {
   const [userProfile, setUserProfile] = useState('');
   const [loading, setLoading] = useState('');
   const [response, setResponse] = useState('');
-  const [error, setError] = useState('');
+  const [error, setError] = useState(false);
   const [badRequest, setBadRequest] = useState('');
   const [redirectPage, setRedirectPage] = useState(false);
   const [eventName, setEventName] = useState('');
@@ -54,8 +54,7 @@ export default function CreateEvent() {
       } catch (error) {
         console.log('get profile failed!');
         console.log(error);
-        const { data } = error.response;
-        setError(data.message);
+        setError(true);
       }
     };
 
@@ -298,7 +297,7 @@ export default function CreateEvent() {
 
   return (
     <>
-      {error.length > 1 && <Navigate to='/profile' replace={true} />}
+      {error && <Navigate to='/profile' replace={true} />}
       {redirectPage && <Navigate to='/eventmain' replace={true} />}
       {loading ? <Spinner /> : pageRedirect}
     </>
