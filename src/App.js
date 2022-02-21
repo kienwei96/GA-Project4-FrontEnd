@@ -32,6 +32,8 @@ import TermsofService from './components/others/TermsofService';
 import EventMain from './components/eventPage/EventMain';
 import CreateEvent from './components/createEvent/createEvent';
 import EventDetails from './components/EventDetails/EventDetails';
+import MyEvent from './components/myEvent/myEventPage';
+import JoinedEvent from './components/joinEventPage/joinEventPage';
 import { ProfileProvider } from './context/ProfileContext';
 
 let theme = createTheme({
@@ -92,6 +94,9 @@ function App() {
                   <Route exact path='/profile' element={<Profile />} />
                   <Route exact path='/profile/:id' element={<OtherProfile />} />
                   <Route exact path='/createEvent' element={<CreateEvent />} />
+                  <Route exact path='/myEvent' element={<MyEvent />} />
+                  <Route exact path='/joinedEvent' element={<JoinedEvent />} />
+
                   <Route
                     exact
                     path='/create-profile'
