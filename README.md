@@ -1,6 +1,4 @@
-# GA-Project4-FrontEnd
-
-# GA Project 3 - MERN Stack
+# GA Project 4 - MERN Stack
 
 ## Sport Event Hosting Web Application
 
