@@ -21,7 +21,7 @@
 ## Preview
 
 Landing Page
-![Landing Page](./wireframe/Landing__Page.png)
+![Landing Page](./wireframe/Landing_Page.png)
 
 Sign Up Page
 ![Sign Up Page](./wireframe/Sign_Up.png)
