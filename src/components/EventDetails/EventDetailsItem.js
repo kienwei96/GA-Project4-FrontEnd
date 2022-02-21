@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Moment from 'react-moment';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, Navigate } from 'react-router-dom';
 import GroupIcon from '@material-ui/icons/Group';
 import VaccinesIcon from '@mui/icons-material/Vaccines';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
@@ -62,6 +62,8 @@ export default function EventDetailsItem(props) {
   const [errorMessage, setErrorMessage] = useState('');
   const [badRequest, setBadRequest] = useState(false);
   const [refresh, setRefresh] = useState(false);
+  const [noProfile, setNoProfile] = useState(false);
+  const [redirectToProfile, setRedirectToProfile] = useState(false);
 
   const callApi = async () => {
     try {
@@ -91,137 +93,168 @@ export default function EventDetailsItem(props) {
   };
 
   const handleJoinSubmit = () => {
-    callApi();
-    handleRefresh();
-    console.log(`joined the ${eventData._id} event!`);
-    window.location.reload();
+    if (noProfile) {
+      setRedirectToProfile(true);
+    } else {
+      callApi();
+      handleRefresh();
+      console.log(`joined the ${eventData._id} event!`);
+      window.location.reload();
+    }
   };
 
   console.log('error message is', errorMessage);
 
-  useEffect(() => {}, [refresh]);
+  useEffect(() => {
+    const getProfile = async () => {
+      try {
+        setLoading(true);
+        const { data } = await fetchContext.authAxios.get(
+          `/profile/${authContext.authState.userInfo._id}`,
+          {}
+        );
+        console.log('get profile success!');
+        setTimeout(() => {
+          setLoading(false);
+        }, 1500);
+      } catch (error) {
+        console.log('get profile failed!');
+        console.log(error);
+        setNoProfile(true);
+      }
+    };
+
+    getProfile();
+  }, [refresh]);
 
   return (
-    <Paper className='pad-2'>
-      <Grid container>
-        <Grid item xs={12} md={6}>
-          <Grid container spacing={6}>
-            <Grid item xs={6}>
-              <span className={styles.labelInfo}>Type of Sport</span>
-              <Typography variant='h6' paragraph>
-                {eventData.sport}
-              </Typography>
-              <span className={styles.labelInfo}>Location</span>
-              <Typography variant='h6' paragraph>
-                {eventData.location}
-              </Typography>
+    <>
+      {redirectToProfile && <Navigate to='/profile' replace={true} />}
+      <Paper className='pad-2'>
+        <Grid container>
+          <Grid item xs={12} md={6}>
+            <Grid container spacing={6}>
+              <Grid item xs={6}>
+                <span className={styles.labelInfo}>Type of Sport</span>
+                <Typography variant='h6' paragraph>
+                  {eventData.sport}
+                </Typography>
+                <span className={styles.labelInfo}>Location</span>
+                <Typography variant='h6' paragraph>
+                  {eventData.location}
+                </Typography>
 
-              <span className={styles.labelInfo}>Start Date</span>
-              <Typography variant='h6' paragraph>
-                {<Moment format='MMMM Do, YYYY'>{eventData.startDate}</Moment>}
-              </Typography>
+                <span className={styles.labelInfo}>Start Date</span>
+                <Typography variant='h6' paragraph>
+                  {
+                    <Moment format='MMMM Do, YYYY'>
+                      {eventData.startDate}
+                    </Moment>
+                  }
+                </Typography>
+              </Grid>
+
+              <Grid item xs={6}>
+                <span className={styles.labelInfo}>Number of Player</span>
+                <Box display='flex'>
+                  <GroupIcon className={styles.icon} />
+                  <Typography variant='h6' paragraph>
+                    {eventData.player}
+                  </Typography>
+                </Box>
+                <span className={styles.labelInfo}>Game Level</span>
+                <Box display='flex'>
+                  <SportsEsportsIcon className={styles.icon} />
+                  <Typography variant='h6' paragraph>
+                    {eventData.level}
+                  </Typography>
+                </Box>
+                <span className={styles.labelInfo}>COVID-19 Vaccination</span>
+                <Box display='flex'>
+                  <VaccinesIcon className={styles.icon} />
+                  <Typography variant='h6' paragraph>
+                    {eventData.vaccination}
+                  </Typography>
+                </Box>
+              </Grid>
             </Grid>
 
-            <Grid item xs={6}>
-              <span className={styles.labelInfo}>Number of Player</span>
-              <Box display='flex'>
-                <GroupIcon className={styles.icon} />
-                <Typography variant='h6' paragraph>
-                  {eventData.player}
-                </Typography>
-              </Box>
-              <span className={styles.labelInfo}>Game Level</span>
-              <Box display='flex'>
-                <SportsEsportsIcon className={styles.icon} />
-                <Typography variant='h6' paragraph>
-                  {eventData.level}
-                </Typography>
-              </Box>
-              <span className={styles.labelInfo}>COVID-19 Vaccination</span>
-              <Box display='flex'>
-                <VaccinesIcon className={styles.icon} />
-                <Typography variant='h6' paragraph>
-                  {eventData.vaccination}
-                </Typography>
-              </Box>
-            </Grid>
-          </Grid>
+            <span className={styles.labelInfo}>Description</span>
+            <Typography variant='h6' paragraph>
+              {eventData.description ? eventData.description : 'None'}
+            </Typography>
 
-          <span className={styles.labelInfo}>Description</span>
-          <Typography variant='h6' paragraph>
-            {eventData.description ? eventData.description : 'None'}
-          </Typography>
-
-          <Typography paragraph>
-            Host By{' '}
-            <Link to={`/profile/${eventData.user._id}`}>
-              {eventData.user.name}
-            </Link>
-          </Typography>
-          {isAuthenticated ? (
-            <>
-              <div className={styles.playerDiv}>
-                <span className={styles.labelInfo}>Players</span>
-                <div className='marginT-1'>
-                  {eventData.listofplayer.map((player, index) => {
-                    return (
-                      <Link to={`/profile/${player._id}`}>
-                        <Chip
-                          key={player._id}
-                          className='marginR-1 marginX-1'
-                          avatar={<Avatar>{index + 1}</Avatar>}
-                          label={player.name}
-                          variant='outlined'
-                        />
-                      </Link>
-                    );
-                  })}
+            <Typography paragraph>
+              Host By{' '}
+              <Link to={`/profile/${eventData.user._id}`}>
+                {eventData.user.name}
+              </Link>
+            </Typography>
+            {isAuthenticated ? (
+              <>
+                <div className={styles.playerDiv}>
+                  <span className={styles.labelInfo}>Players</span>
+                  <div className='marginT-1'>
+                    {eventData.listofplayer.map((player, index) => {
+                      return (
+                        <Link to={`/profile/${player._id}`}>
+                          <Chip
+                            key={player._id}
+                            className='marginR-1 marginX-1'
+                            avatar={<Avatar>{index + 1}</Avatar>}
+                            label={player.name}
+                            variant='outlined'
+                          />
+                        </Link>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            </>
-          ) : (
-            ''
-          )}
+              </>
+            ) : (
+              ''
+            )}
+          </Grid>
+          <Grid container item xs={12} md={6}>
+            <img
+              style={{ width: '100%' }}
+              src={photo(eventData.sport)}
+              alt='Sport'
+            />
+          </Grid>
         </Grid>
-        <Grid container item xs={12} md={6}>
-          <img
-            style={{ width: '100%' }}
-            src={photo(eventData.sport)}
-            alt='Sport'
-          />
-        </Grid>
-      </Grid>
-      <hr />
+        <hr />
 
-      {isAuthenticated ? (
-        <Box display='flex'>
-          <Button
-            className='primary-color'
-            onClick={handleJoinSubmit}
-            variant='contained'
-            color='primary'
-          >
-            Join This Event
-          </Button>
-          <p className='marginL-1'>
-            {eventData.player - eventData.listofplayer.length} spots left
-          </p>
-        </Box>
-      ) : (
-        ''
-      )}
+        {isAuthenticated ? (
+          <Box display='flex'>
+            <Button
+              className='primary-color'
+              onClick={handleJoinSubmit}
+              variant='contained'
+              color='primary'
+            >
+              Join This Event
+            </Button>
+            <p className='marginL-1'>
+              {eventData.player - eventData.listofplayer.length} spots left
+            </p>
+          </Box>
+        ) : (
+          ''
+        )}
 
-      <div className={styles.errorMessage}>
-        {badRequest ? <strong> {errorMessage} !</strong> : ''}
-      </div>
-      <Button
-        className='primary-color white-link'
-        size='large'
-        variant='contained'
-        onClick={handleBackButton}
-      >
-        Back
-      </Button>
-    </Paper>
+        <div className={styles.errorMessage}>
+          {badRequest ? <strong> {errorMessage} !</strong> : ''}
+        </div>
+        <Button
+          className='primary-color white-link'
+          size='large'
+          variant='contained'
+          onClick={handleBackButton}
+        >
+          Back
+        </Button>
+      </Paper>
+    </>
   );
 }
