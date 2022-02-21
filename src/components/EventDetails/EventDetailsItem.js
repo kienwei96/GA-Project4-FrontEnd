@@ -118,6 +118,7 @@ export default function EventDetailsItem(props) {
           setLoading(false);
         }, 1500);
       } catch (error) {
+        setLoading(false);
         console.log('get profile failed!');
         console.log(error);
         setNoProfile(true);
