@@ -47,7 +47,10 @@ export default function ProfileContent(props) {
           <Card>
             <CardContent>
               <p>
-                <strong>Name:</strong> {authContext.authState.userInfo.name}
+                <strong>Name:</strong>{' '}
+                {props.otherProfile
+                  ? props.user.name
+                  : authContext.authState.userInfo.name}
               </p>
               <p>
                 <strong>Contact No. :</strong> {profileData.contact}
