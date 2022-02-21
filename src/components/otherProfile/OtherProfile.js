@@ -15,6 +15,7 @@ export default function Profile() {
   const fetchContext = useContext(FetchContext);
   const profileContext = useContext(ProfileContext);
   const [userProfile, setUserProfile] = useState('');
+  const [userName, setUserName] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -38,7 +39,26 @@ export default function Profile() {
       }
     };
 
+    const getUser = async () => {
+      try {
+        setLoading(true);
+        const { data } = await fetchContext.authAxios.get(
+          `/profile/user/${params.id}`
+        );
+        console.log('user name', data);
+        setUserName(data);
+        setTimeout(() => {
+          setLoading(false);
+        }, 1500);
+      } catch (error) {
+        console.log('error now', error);
+        const { data } = error.response;
+        setLoading(false);
+      }
+    };
+
     getProfile();
+    getUser();
   }, []);
 
   console.log('error at other Profile.js', error);
@@ -51,7 +71,12 @@ export default function Profile() {
     profilePage = <ErrorPage />;
   } else if (Object.keys(userProfile).length > 0) {
     profilePage = (
-      <ProfileContent profileData={userProfile} profileCheck={false} />
+      <ProfileContent
+        profileData={userProfile}
+        profileCheck={false}
+        otherProfile={true}
+        user={userName.userAccount}
+      />
     );
   } else {
     profilePage = <ErrorPage />;
