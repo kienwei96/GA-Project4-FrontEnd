@@ -115,6 +115,12 @@ export default function EventsItem(props) {
         <CardActions>
           <Button
             className='primary-color white-link'
+            style={{
+              minWidth: '160px',
+              maxWidth: '160px',
+              minHeight: '60px',
+              maxHeight: '60px',
+            }}
             size='large'
             variant='contained'
             fullWidth
@@ -129,6 +135,12 @@ export default function EventsItem(props) {
         <CardActions>
           <Button
             className='primary-color white-link'
+            style={{
+              minWidth: '160px',
+              maxWidth: '160px',
+              minHeight: '60px',
+              maxHeight: '60px',
+            }}
             size='large'
             variant='contained'
             fullWidth
@@ -143,6 +155,12 @@ export default function EventsItem(props) {
         <CardActions>
           <Button
             className='primary-color white-link'
+            style={{
+              minWidth: '160px',
+              maxWidth: '160px',
+              minHeight: '60px',
+              maxHeight: '60px',
+            }}
             size='large'
             variant='contained'
             fullWidth
@@ -162,7 +180,12 @@ export default function EventsItem(props) {
         <Card className={styles.card}>
           <Link to={`/event/${eventData._id}`}>
             <img
-              style={{ width: '100%', height: '220px' }}
+              style={{
+                minWidth: '200px',
+                maxWidth: '200px',
+                minHeight: '220px',
+                maxHeight: '220px',
+              }}
               src={photo(eventData.sport)}
               alt='Sport'
             />
