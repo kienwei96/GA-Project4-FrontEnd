@@ -146,7 +146,7 @@ export default function EventsItem(props) {
             fullWidth
             onClick={handleLeft}
           >
-            Cancel to join
+            Leave Event
           </Button>
         </CardActions>
       );
